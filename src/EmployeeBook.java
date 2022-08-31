@@ -24,14 +24,14 @@ public class EmployeeBook {
 
     public void change(int id, String department) {
         var employee = findEmployeeById(id);
-        if (employee != null){
+        if (employee != null) {
             employee.setDepartment(department);
         }
     }
 
     public void change(int id, double salary) {
         var employee = findEmployeeById(id);
-        if (employee != null){
+        if (employee != null) {
             employee.setSalary(salary);
         }
     }
@@ -79,9 +79,9 @@ public class EmployeeBook {
         }
     }
 
-    public Employee findEmployeeById(int id){
-        for (Employee employee: employees) {
-            if (employee != null && employee.getId() == id){
+    public Employee findEmployeeById(int id) {
+        for (Employee employee : employees) {
+            if (employee != null && employee.getId() == id) {
                 return employee;
             }
         }
@@ -97,10 +97,12 @@ public class EmployeeBook {
     }
 
     private Employee findEmployeeWithMinSalary(Employee[] employees) {
-        Employee employee = employees[0];
-        for (Employee value : employees) {
-            if (value != null && value.getSalary() < employee.getSalary()) {
-                employee = value;
+        Employee employee = findEmployeeFirst();
+        if (employee != null) {
+            for (Employee value : employees) {
+                if (value != null && value.getSalary() < employee.getSalary()) {
+                    employee = value;
+                }
             }
         }
         return employee;
@@ -115,10 +117,12 @@ public class EmployeeBook {
     }
 
     private Employee findEmployeeWithMaxSalary(Employee[] employees) {
-        Employee employee = employees[0];
-        for (Employee value : employees) {
-            if (value != null && value.getSalary() > employee.getSalary()) {
-                employee = value;
+        Employee employee = findEmployeeFirst();
+        if (employee != null) {
+            for (Employee value : employees) {
+                if (value != null && value.getSalary() > employee.getSalary()) {
+                    employee = value;
+                }
             }
         }
         return employee;
@@ -157,14 +161,23 @@ public class EmployeeBook {
         return result;
     }
 
-    public String[] findAllDepartments(){
+    public Employee findEmployeeFirst() {
+        for (Employee employee : employees) {
+            if (employee != null) {
+                return employee;
+            }
+        }
+        return null;
+    }
+
+    public String[] findAllDepartments() {
         String[] departments = new String[employees.length];
         int next = 0;
-        for (Employee employee: employees) {
-            if (employee != null){
+        for (Employee employee : employees) {
+            if (employee != null) {
                 boolean isExist = false;
-                for (String department: departments) {
-                    if (department != null && department.equals(employee.getDepartment())){
+                for (String department : departments) {
+                    if (department != null && department.equals(employee.getDepartment())) {
                         isExist = true;
                         break;
                     }
@@ -221,16 +234,16 @@ public class EmployeeBook {
         }
     }
 
-    public void printDepartments(){
+    public void printDepartments() {
         var departments = findAllDepartments();
-        for (String department: departments) {
-            if (department == null){
+        for (String department : departments) {
+            if (department == null) {
                 break;
             }
             System.out.println("Департамент " + department);
             var employeesInDep = findEmployeesByDepartment(department);
-            for (Employee employee: employeesInDep) {
-                if (employee != null){
+            for (Employee employee : employeesInDep) {
+                if (employee != null) {
                     System.out.println(employee.getFullName() + " " + employee.getSalary());
                 }
             }

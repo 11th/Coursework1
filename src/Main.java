@@ -16,8 +16,8 @@ public class Main {
         System.out.println("\nФИО");
         employeeBook.printEmployeesName();
 
-        System.out.println("\nУдалить сотрудника с id 2");
-        employeeBook.delete(2);
+        System.out.println("\nУдалить сотрудника с id 0");
+        employeeBook.delete(0);
         System.out.println(employeeBook);
 
         System.out.println("\nСоздать нового");
